@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<page>
+    <title>Colt Auto Home</title>
+    <title-id>Colt Automotive Home Page</title-id>
+    <description>Colt Automotive Home Page</description>
+    <description-id>page.coltautohome.description</description-id>
+    <template-instance>coltautohome-three-column</template-instance>
+    <authentication>user</authentication>
+</page>

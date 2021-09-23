@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Definition of new Model -->
+
+<!-- The important part here is the name - Note: the use of the col: namespace
+     which is defined further on in the document -->
+<model name="col:coltmodel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+    <!-- Optional meta-data about the model -->
+    <description>Colt Automotive model</description>
+    <author>Alfresco Training</author>
+    <version>1.0</version>
+
+    <!-- Imports are required to allow references to definitions in other models -->
+    <imports>
+        <!-- Import Alfresco Dictionary Definitions -->
+        <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+        <!-- Import Alfresco Content Domain Model Definitions -->
+        <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+        <!-- Import Alfresco Data List Model Definitions -->
+        <import uri="http://www.alfresco.org/model/datalist/1.0" prefix="dl"/>
+    </imports>
+
+    <!-- Introduction of new namespaces defined by this model -->
+    <!-- NOTE: The following namespace "mar.green-energy-demo.com" should be changed to reflect your own namespace -->
+    <namespaces>
+        <namespace uri="colt.colt-auto-demo.com" prefix="col"/>
+    </namespaces>
+
+    <!--		C O N S T R A I N T S		-->
+    <constraints>
+        <constraint name="col:plantList" type="LIST">
+            <parameter name="allowedValues">
+                <list>
+                    
+                    <value>Atlanta - Georgia USA</value>
+                    <value>Tokyo - Japan</value>
+                    <value>London - England</value>
+                </list>
+            </parameter>
+        </constraint>
+        <constraint name="col:vehicleType" type="LIST">
+            <parameter name="allowedValues">
+                <list>
+                    <value>Coupe</value>
+                    <value>Sedan</value>
+                    <value>Pickup</value>
+                    <value>Sports Car</value>
+                    <value>SUV</value>
+                   
+                </list>
+            </parameter>
+        </constraint>
+        <constraint name="col:colorList" type="LIST">
+            <parameter name="allowedValues">
+                <list>
+                    <value>Black</value>
+                    <value>Green</value>
+                    <value>Red</value>
+                    <value>Yellow</value>
+		    <value>Orange</value>
+		    <value>Blue</value>
+                </list>
+            </parameter>
+        </constraint>
+        <constraint name="col:vinCheck" type="REGEX">
+            <parameter name="expression">
+                <value><![CDATA[[0-9]{7}\S\w[A-Z]\S\w[1-9]\S\d[0-9]{2}]]></value>
+            </parameter>
+        </constraint> 
+
+        <!--	The following constraints relate to the datalist type -->
+        <constraint name="col:vehicleStatusConstraint" type="LIST">
+            <parameter name="allowedValues">
+                <list>
+                    <value>Under Construction</value>
+                    <value>Completed</value>
+                    <value>In Transit</value>
+                    <value>Delivered</value>
+                </list>
+            </parameter>
+        </constraint>
+        <constraint name="col:salesPriority" type="LIST">
+            <parameter name="allowedValues">
+                <list>
+                    <value>1</value>
+                    <value>2</value>
+                    <value>3</value>
+                </list>
+            </parameter>
+        </constraint>
+         <constraint name="col:priceConstraint" type="LENGTH">
+		<parameter name="minLength">
+			<value>5</value>
+		</parameter>
+		<parameter name="maxLength">
+			<value>5</value>
+		</parameter>
+     </constraint>
+	<constraint name="col:optionConstraints" type="LIST">
+		<parameter name="allowedValues">
+		<list>
+			<value>Option package 1a</value>
+			<value>Option package 1b</value>
+			<value>Option package 1c</value>
+		</list>
+		</parameter>
+	</constraint>
+    </constraints>
+
+    <!--		T Y P E   D E F I N I T I O N S		-->
+    <types>
+        <!-- Definition of new Content Type: Vehicle Type-->
+        <!-- This is a document type used to represent any type of vehicle for production -->
+        <type name="col:vehicle">
+            <title>Vehicle Type</title>
+            <parent>cm:content</parent>
+		
+            <properties>
+		<property name="col:vehicleClass">
+		<description>Class of vehicle</description>
+		<type>d:text</type>
+		<constraints>
+			<constraint ref="col:vehicleType"/>
+		</constraints>
+		</property>
+		
+                <property name="col:vehicleID">
+                    <description>Vehicle Identification Number</description>
+                    <type>d:text</type>
+		<constraints>
+					<constraint ref="col:vinCheck"/>
+			</constraints>	
+                </property>
+                <property name="col:manufacturerDate">
+                    <description>Used to determine the date of manufacturer</description>
+                    <type>d:date</type>
+                </property>
+                <property name="col:shipDate">
+		    <description>Used to determine the date the vehicle shipped to the dealer</description>
+                    <type>d:date</type>
+                </property>
+                <property name="col:recievdedDate">
+                    <description>Used to determine the date the vehicle arrived at the dealer</description>
+                    <type>d:date</type>
+                </property>
+                <property name="col:dealerCost">
+                    <description>Used to determine the dealers cost for the vehicle.</description>
+                    <type>d:int</type>
+		    <constraints>
+					<constraint ref="col:priceConstraint"/>
+		    </constraints>
+		</property>
+                <property name="col:dealerListprice">
+		    <description>Used to determine the dealers suggested retail price</description>
+		    <type>d:int</type>
+		    <constraints>
+					<constraint ref="col:priceConstraint"/>
+		    </constraints>
+                </property>
+		<property name="col:vehicleIncentives">
+		   <description>Used to determine any incentives for the vehicle</description>
+		   <type>d:text</type>
+		</property>
+
+                <property name="col:vehicleStatus">
+		<description>Determines the vehicles status, i.e. being built, etc.</description>
+		<type>d:text</type>
+		<constraints>
+			<constraint ref="col:vehicleStatusConstraint"/>
+		</constraints>
+		</property>
+		
+		<property name="col:vehicleColor">
+		<description>Vehicle exterior color</description>
+		<type>d:text</type>
+		<constraints>
+			<constraint ref="col:colorList"/>
+		</constraints>
+		</property>
+
+		<property name="col:vehicleOptions">
+		<description>Vehicle package options</description>
+		<type>d:text</type>
+		<constraints>
+			<constraint ref="col:optionConstraints"/>
+		</constraints>
+		</property>
+
+             </properties>
+
+            <!-- Associated Objects -->
+            <associations>
+                <association name="col:salesPerson">
+                    <title>Sales Person</title>
+                    <description>Used to indicate sales ownership.</description>
+                    <target>
+                        <class>cm:person</class>
+                        <mandatory>false</mandatory>
+                        <many>false</many>
+                    </target>
+                </association>
+            
+	   <association name="col:vehicleImage">
+               	       <title>Vehicle Image</title>
+		       <target>
+					<class>cm:content</class>
+					<mandatory>false</mandatory>
+					<many>false</many>
+		       </target>
+            	</association>
+	  
+         </associations>
+	
+        </type>
+</types>
+       
+
+    <!--	A S P E C T   D E F I N I T I O N S 	-->
+    <aspects>
+        <!--	This indicates how many days before the next review date this document should have an automatic review start. 
+				If this aspect is not present it is assumed that review starts on the next_review_date. This would be used
+				in conjunction with a scheduled job to start a review workflow	-->
+        <aspect name="col:salesManagerReview">
+            <title>Auto Review</title>
+            <properties>
+                <property name="col:salesManagerReviewStart">
+                    <!-- Requires a constraint -->
+                    <description>This indicates how long the review for the order should be from the sales manager</description>
+                    <type>d:int</type>
+                    <default>1</default>
+                </property>
+            </properties>
+        </aspect>
+
+        <aspect name="col:salesManagerReleased">
+            <title>Released</title>
+            <properties>
+                <property name="col:salesManagerReleased_Date">
+                    <!-- Requires a constraint -->
+                    <description>Typically this would be based on the date that the user initially
+                        entered in proposed_publication_date on the Collateral type.</description>
+                    <type>d:date</type>
+                </property>
+            </properties>
+        </aspect>
+
+        <!--	This aspect is added as part of a workflow, during the sign-off task. The value will be set to the person completing the task -->
+        <aspect name="col:customersignoff">
+            <title>Signoff</title>
+            <associations>
+                <association name="col:signatory">
+                    <title>Signatory</title>
+                    <description>This should be added as part of a workflow action, hence it is
+                        automatic.</description>
+                    <target>
+                        <class>cm:person</class>
+                        <mandatory>true</mandatory>
+                        <many>false</many>
+                    </target>
+                </association>
+            </associations>
+        </aspect>
+
+        
+    </aspects>
+
+</model>
+

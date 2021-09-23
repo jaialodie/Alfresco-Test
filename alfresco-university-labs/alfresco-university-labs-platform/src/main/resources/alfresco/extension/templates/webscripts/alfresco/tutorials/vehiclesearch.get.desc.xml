@@ -1,0 +1,9 @@
+<webscript>
+    <shortname>Vehicle Search</shortname>
+    <description>Vehicle Search Web Script</description>
+    <family>Alfresco University</family>
+    <url>/sample/vehiclesearch</url>
+    <format default="json">extension</format>
+    <authentication>user</authentication>
+    <transaction>none</transaction>
+</webscript>

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<component>
+    <scope>page</scope>
+    <region-id>region1</region-id>
+    <source-id>coltautohome</source-id>
+    <url>/components/coltautomotive/region1</url>
+</component>

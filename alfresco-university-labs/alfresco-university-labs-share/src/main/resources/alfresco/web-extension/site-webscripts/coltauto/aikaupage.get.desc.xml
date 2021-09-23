@@ -1,0 +1,6 @@
+<webscript>
+    <shortname>Sample Aikau Page</shortname>
+    <description>A simple Aikau page</description>
+    <family>Colt Automotive</family>
+    <url>/components/coltautomotive/aikau</url>
+</webscript>

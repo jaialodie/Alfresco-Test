@@ -1,0 +1,1 @@
+model.body = "This is a test of page components!";

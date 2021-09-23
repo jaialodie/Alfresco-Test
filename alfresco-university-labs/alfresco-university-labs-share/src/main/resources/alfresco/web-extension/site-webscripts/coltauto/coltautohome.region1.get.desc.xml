@@ -1,0 +1,6 @@
+<webscript>
+    <shortname>Region 1 web script</shortname>
+    <description>This is the Region 1 web script for the colt auto home page.</description>
+    <family>Colt Automotive</family>
+    <url>/components/coltautomotive/region1</url>
+</webscript>

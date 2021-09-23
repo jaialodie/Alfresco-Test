@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Definition of new Model -->
+<model name="scr:somecoreviewable-model" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+    <!-- Optional meta-data about the model -->
+    <description>Someco Reviews Model</description>
+    <author>Jaime Alonso</author>
+    <version>1.0</version>
+
+    <!-- Imports are required to allow references to definitions in other models -->
+    <imports>
+        <!-- Import Alfresco Dictionary Definitions -->
+        <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d" />
+        <!-- Import Alfresco Content Domain Model Definitions -->
+        <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm" />
+        <import uri="http://www.alfresco.org/model/system/1.0" prefix="sys" />
+    </imports>
+
+    <!-- Introduction of new namespaces defined by this model -->
+    <namespaces>
+        <namespace uri="http://www.someco.com/model/review/1.0" prefix="scr" />
+    </namespaces>
+    <types>
+        <type name="scr:review">
+            <title>Someco Review</title>
+            <parent>sys:base</parent>
+            <properties>
+                <property name="scr:rating">
+                    <type>d:int</type>
+                    <mandatory>true</mandatory>
+                </property>
+            </properties>
+        </type>
+    </types>
+    <aspects>
+        <aspect name="scr:review">
+            <title>Someco Review</title>
+            <properties>
+                <property name="scr:numOfWords">
+                    <type>d:double</type>
+                    <mandatory>false</mandatory>
+                </property>
+            </properties>
+        </aspect>
+    </aspects>
+</model>
